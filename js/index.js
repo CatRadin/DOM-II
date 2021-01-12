@@ -1,10 +1,12 @@
 // Your code goes here
 //VARIABLES----------------------------------------------------
 let nav = document.querySelectorAll('header .nav-link');
-let busPic = document.querySelector('.intro img');
-console.log(busPic);
 
-busPic.style.filter = 'gracyscale(100%)';
+let busPic = document.querySelector('.intro img');
+
+let introP = document.querySelector('.intro p');
+
+
 
  
 
@@ -17,18 +19,41 @@ busPic.style.filter = 'gracyscale(100%)';
 
 //EVENT LISTENERS ---------------------------------------------
 
+//prevent refreshing of page
+
+
 //mouse over
-nav[0].addEventListener('mouseover', mouseOverColor);
-nav[1].addEventListener('mouseover', mouseOverColor);
-nav[2].addEventListener('mouseover', mouseOverColor);
-nav[3].addEventListener('mouseover', mouseOverColor);
+nav.forEach(item => {
+    item.addEventListener('mouseover', mouseOverColor);
+});
+
+// nav[0].addEventListener('mouseover', mouseOverColor);
+// nav[1].addEventListener('mouseover', mouseOverColor);
+// nav[2].addEventListener('mouseover', mouseOverColor);
+// nav[3].addEventListener('mouseover', mouseOverColor);
 
 //mouse out
-nav[0].addEventListener('mouseout', mouseOut);
-nav[1].addEventListener('mouseout', mouseOut);
-nav[2].addEventListener('mouseout', mouseOut);
-nav[3].addEventListener('mouseout',mouseOut);
 
+nav.forEach(item => {
+    item.addEventListener('mouseout', mouseOut);
+});
+
+// nav[0].addEventListener('mouseout', mouseOut);
+// nav[1].addEventListener('mouseout', mouseOut);
+// nav[2].addEventListener('mouseout', mouseOut);
+// nav[3].addEventListener('mouseout',mouseOut);
+
+//key press [escape]
+document.addEventListener('keydown', hueChangeBus);
+
+//wheel event
+introP.addEventListener('wheel', scrollText);
+
+//loading event
+window.addEventListener('load', (event) =>
+{
+    alert('the page has loaded');
+})
 
 
 
@@ -56,8 +81,18 @@ function mouseOut(e){
     elm.style.fontWeight = null; 
 }
 
-//key down dark mode
+//key down filter on image of bus that clears on the push of other keys
 
-function grayScaleBus(e){
+function hueChangeBus(e){
+    if(event.key === 'Escape'){
+    busPic.style.filter = 'hue-rotate(90deg)';
+    } else {
+        busPic.style.filter = null;
+    }
+}
 
+//wheel 
+
+function scrollText(e){
+    introP.style.fontSize = '2rem';
 }
